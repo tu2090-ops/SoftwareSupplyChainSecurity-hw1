@@ -1,3 +1,4 @@
+# I have refered LLM to understand the concept of each function in depth and error solving when required. LLM helped me understand the concept about merkle proof.
 import argparse
 # Adding necessary imports for API calls and JSON handling
 import requests
