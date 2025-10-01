@@ -1,2 +1,2 @@
-# Home Work 1
-Homework 1 in Software Supply Chain Security class.
+# SSCS HW 1
+Homework 1 - Software Supply Chain Security.
