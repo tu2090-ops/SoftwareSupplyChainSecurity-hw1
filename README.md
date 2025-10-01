@@ -1,2 +1,2 @@
-# Python Rekor Monitor Template
-This is template code for an assignment in Software Supply Chain Security class.
+# Home Work 1
+Homework 1 in Software Supply Chain Security class.
