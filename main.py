@@ -1,11 +1,15 @@
-# I have refered LLM to understand the concept of each function in depth and error solving when required. LLM helped me understand the concept about merkle proof.
-import argparse
+"""
+I have referred to LLM to understand the concept of each function in depth
+and error solving when required. LLM helped me understand the concept about merkle proof.
+"""
 
-# Adding necessary imports for API calls and JSON handling
-import traceback  # Now available globally
-import requests
-import json
+import argparse  # Adding necessary imports for API calls and JSON handling
 import base64
+import json
+import traceback  # Now available globally
+
+import requests
+
 from util import extract_public_key, verify_artifact_signature
 from merkle_proof import (
     DefaultHasher,
@@ -19,6 +23,16 @@ R_URL = "https://rekor.sigstore.dev"
 
 
 def get_log_entry(log_index, debug=False):
+    """
+    Retrieve a log entry from Rekor server by log index.
+
+    Args:
+        log_index (int): The index of the log entry to retrieve
+        debug (bool): Whether to print debug information
+
+    Returns:
+         The log entry data or None if error occurs
+    """
     # verify that log index value is sane
     # implementing API call to fetch log entry by index
     # This function now actually queries the Rekor server instead of being a placeholder
@@ -29,7 +43,7 @@ def get_log_entry(log_index, debug=False):
         if debug:
             print({log_index})
 
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=30)
         response.raise_for_status()
         # Parsing JSON response
         data = response.json()
@@ -53,9 +67,9 @@ def get_verification_proof(log_index, debug=False):
         params = {"logIndex": log_index, "proof": "true"}
 
         if debug:
-            print(f"verification proof for index {log_index}")
+            print("verification proof for index {log_index}")
 
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=30)
         response.raise_for_status()
 
         data = response.json()
@@ -66,8 +80,8 @@ def get_verification_proof(log_index, debug=False):
             print("Retrieved verification proof")
 
         return entry
-    except Exception as e:
-        print(f"Error fetching verification proof: {e}")
+    except Exception:
+        print("Error fetching verification proof: {e}")
         return None
 
 
@@ -115,8 +129,8 @@ def inclusion(log_index, artifact_filepath, debug=False):
             DefaultHasher, leaf_index, tree_size, leaf_hash, hashes, root_hash, debug
         )
         print("Inclusion verification successful!")
-    except Exception as e:
-        print(f"Error during inclusion verification: {e}")
+    except Exception:
+        print("Error during inclusion verification: {e}")
         # Removing the duplicate debug check and always print traceback for errors
         if debug:
             traceback.print_exc()
@@ -181,7 +195,7 @@ def consistency(prev_checkpoint, debug=False):
             "treeID": tree_id,
         }
 
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=30)
         response.raise_for_status()
 
         proof_data = response.json()
@@ -201,8 +215,8 @@ def consistency(prev_checkpoint, debug=False):
         )
         print("Consistency verification successful!")
 
-    except Exception as e:
-        print(f"Error during consistency verification: {e}")
+    except Exception:
+        print("Error during consistency verification: {e}")
         if debug:
             traceback.print_exc()
 
@@ -262,7 +276,8 @@ def main():
         checkpoint = get_latest_checkpoint(debug)
         print(json.dumps(checkpoint, indent=2))  # Reduced indent for space by 2
         if debug:
-            with open("checkpoint.json", "w") as f:
+            # Save checkpoint to file for debugging and specifying encoding utf-8
+            with open("checkpoint.json", "w", encoding="utf-8") as f:
                 json.dump(checkpoint, f, indent=2)
             print("Checkpoint saved")
         return
