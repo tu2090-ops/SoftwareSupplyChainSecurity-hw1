@@ -1,0 +1,149 @@
+F541 [*] f-string without any placeholders
+  --> main.py:34:19
+   |
+33 |         if debug:
+34 |             print(f"entry")
+   |                   ^^^^^^^^
+35 |         return entry
+36 |     except Exception as e:
+   |
+help: Remove extraneous `f` prefix
+
+F841 [*] Local variable `e` is assigned to but never used
+  --> main.py:36:25
+   |
+34 |             print(f"entry")
+35 |         return entry
+36 |     except Exception as e:
+   |                         ^
+37 |         print (f"ERROR")
+38 |         return None
+   |
+help: Remove assignment to unused variable `e`
+
+F541 [*] f-string without any placeholders
+  --> main.py:37:16
+   |
+35 |         return entry
+36 |     except Exception as e:
+37 |         print (f"ERROR")
+   |                ^^^^^^^^
+38 |         return None
+   |
+help: Remove extraneous `f` prefix
+
+F541 [*] f-string without any placeholders
+  --> main.py:58:19
+   |
+57 |         if debug:
+58 |             print(f"Retrieved verification proof")
+   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+59 |             
+60 |         return entry
+   |
+help: Remove extraneous `f` prefix
+
+F541 [*] f-string without any placeholders
+  --> main.py:74:15
+   |
+72 |     # processing data in streams to avoid loading large files into memorybr
+73 |     if debug:
+74 |         print(f"Inclusion verification")
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+75 |     entry = get_verification_proof(log_index, debug)
+76 |     if not entry:
+   |
+help: Remove extraneous `f` prefix
+
+F541 [*] f-string without any placeholders
+   --> main.py:103:19
+    |
+101 |         leaf_hash = compute_leaf_hash(body_b64)
+102 |         if debug:
+103 |             print(f"Verifying inclusion proof.")
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+104 |         # Verifying the inclusion proof
+105 |         verify_inclusion(DefaultHasher, leaf_index, tree_size, leaf_hash, hashes, root_hash, debug)
+    |
+help: Remove extraneous `f` prefix
+
+F541 [*] f-string without any placeholders
+   --> main.py:119:19
+    |
+118 |         if debug:
+119 |             print(f"latest checkpoint")
+    |                   ^^^^^^^^^^^^^^^^^^^^
+120 |         
+121 |         response = requests.get(url)
+    |
+help: Remove extraneous `f` prefix
+
+F541 [*] f-string without any placeholders
+   --> main.py:127:19
+    |
+126 |         if debug:
+127 |             print(f"checkpoint info")
+    |                   ^^^^^^^^^^^^^^^^^^
+128 |             
+129 |         return checkpoint_info
+    |
+help: Remove extraneous `f` prefix
+
+F541 [*] f-string without any placeholders
+   --> main.py:143:15
+    |
+142 |     if debug:
+143 |         print(f"Starting check")
+    |               ^^^^^^^^^^^^^^^^^
+144 |     
+145 |     # Getting the latest checkpoint
+    |
+help: Remove extraneous `f` prefix
+
+F541 [*] f-string without any placeholders
+   --> main.py:161:19
+    |
+160 |         if debug:
+161 |             print(f"Fetching proof.")
+    |                   ^^^^^^^^^^^^^^^^^^
+162 |         
+163 |         # Single API calling for proof
+    |
+help: Remove extraneous `f` prefix
+
+F541 [*] f-string without any placeholders
+   --> main.py:178:19
+    |
+177 |         if debug:
+178 |             print(f"Verifying consistency.")
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+179 |         
+180 |         # Verifying consistency
+    |
+help: Remove extraneous `f` prefix
+
+E741 Ambiguous variable name: `l`
+  --> merkle_proof.py:25:29
+   |
+23 |         return h.digest()
+24 |
+25 |     def hash_children(self, l, r):
+   |                             ^
+26 |         h = self.new()
+27 |         b = bytes([RFC6962_NODE_HASH_PREFIX]) + l + r
+   |
+
+F841 [*] Local variable `e` is assigned to but never used
+  --> util.py:57:32
+   |
+55 |             ec.ECDSA(hashes.SHA256())
+56 |         )
+57 |     except InvalidSignature as e:
+   |                                ^
+58 |         print("Signature is invalid")
+59 |     except Exception as e:
+   |
+help: Remove assignment to unused variable `e`
+
+Found 13 errors.
+[*] 12 fixable with the `--fix` option.
