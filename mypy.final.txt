@@ -1,5 +1,1 @@
-main.py:6: error: Library stubs not installed for "requests"  [import-untyped]
-main.py:6: note: Hint: "python3 -m pip install types-requests"
-main.py:6: note: (or run "mypy --install-types" to install all missing stub packages)
-main.py:6: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
-Found 1 error in 1 file (checked 3 source files)
+Success: no issues found in 3 source files
