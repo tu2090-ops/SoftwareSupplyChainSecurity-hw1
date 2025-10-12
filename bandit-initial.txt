@@ -1,16 +1,6 @@
-Run started:2025-10-06 05:07:00.522059
+Run started:2025-10-12 21:53:49.965134
 
 Test results:
->> Issue: [B113:request_without_timeout] Call to requests without timeout
-   Severity: Medium   Confidence: Low
-   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
-   More Info: https://bandit.readthedocs.io/en/1.8.6/plugins/b113_request_without_timeout.html
-   Location: ./main.py:147:19
-146	
-147	        response = requests.get(url)
-148	        response.raise_for_status()
-
---------------------------------------------------
 >> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
    Severity: Low   Confidence: High
    CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
@@ -39108,7 +39098,7 @@ Test results:
 --------------------------------------------------
 
 Code scanned:
-	Total lines of code: 548608
+	Total lines of code: 548654
 	Total lines skipped (#nosec): 9
 	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 11
 
@@ -39116,11 +39106,11 @@ Run metrics:
 	Total issues (by severity):
 		Undefined: 0
 		Low: 3666
-		Medium: 146
+		Medium: 145
 		High: 23
 	Total issues (by confidence):
 		Undefined: 0
-		Low: 3
+		Low: 2
 		Medium: 49
 		High: 3783
 Files skipped (0):
