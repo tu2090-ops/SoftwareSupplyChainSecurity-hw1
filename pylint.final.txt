@@ -5,17 +5,11 @@ util.py:37:0: C0116: Missing function or method docstring (missing-function-docs
 util.py:56:11: W0718: Catching too general exception Exception (broad-exception-caught)
 ************* Module main
 main.py:57:11: W0718: Catching too general exception Exception (broad-exception-caught)
-main.py:62:0: C0116: Missing function or method docstring (missing-function-docstring)
-main.py:83:11: W0718: Catching too general exception Exception (broad-exception-caught)
-main.py:88:0: C0116: Missing function or method docstring (missing-function-docstring)
-main.py:88:0: R0914: Too many local variables (17/15) (too-many-locals)
-main.py:132:11: W0718: Catching too general exception Exception (broad-exception-caught)
-main.py:139:0: C0116: Missing function or method docstring (missing-function-docstring)
-main.py:156:11: W0718: Catching too general exception Exception (broad-exception-caught)
-main.py:147:19: W3101: Missing timeout argument for method 'requests.get' can cause your program to hang indefinitely (missing-timeout)
-main.py:161:0: C0116: Missing function or method docstring (missing-function-docstring)
-main.py:218:11: W0718: Catching too general exception Exception (broad-exception-caught)
-main.py:224:0: C0116: Missing function or method docstring (missing-function-docstring)
+main.py:96:11: W0718: Catching too general exception Exception (broad-exception-caught)
+main.py:101:0: R0914: Too many local variables (17/15) (too-many-locals)
+main.py:160:11: W0718: Catching too general exception Exception (broad-exception-caught)
+main.py:196:11: W0718: Catching too general exception Exception (broad-exception-caught)
+main.py:270:11: W0718: Catching too general exception Exception (broad-exception-caught)
 ************* Module merkle_proof
 merkle_proof.py:133:0: C0301: Line too long (112/100) (line-too-long)
 merkle_proof.py:1:0: C0114: Missing module docstring (missing-module-docstring)
@@ -43,5 +37,5 @@ merkle_proof.py:154:0: R0917: Too many positional arguments (7/5) (too-many-posi
 merkle_proof.py:172:0: C0116: Missing function or method docstring (missing-function-docstring)
 
 ------------------------------------------------------------------
-Your code has been rated at 8.68/10 (previous run: 8.38/10, +0.30)
+Your code has been rated at 8.87/10 (previous run: 8.87/10, +0.00)
 
