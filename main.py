@@ -86,6 +86,10 @@ def get_verification_proof(log_index, debug=False):
         response.raise_for_status()
 
         data = response.json()
+        if not data:
+            print("Error: No data received for log entry.")
+            return None
+        # Getting the first key since API returns a dict with UUID keys
         entry_key = next(iter(data.keys()))
         entry = data[entry_key]
 
