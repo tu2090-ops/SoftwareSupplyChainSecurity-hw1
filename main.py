@@ -254,7 +254,7 @@ def consistency(prev_checkpoint, debug=False):
         response.raise_for_status()
 
         proof_data = response.json()
-        consistency_proof = proof_data.get("consistencyProof")
+        consistency_proof = proof_data.get("hashes", [])
 
         if debug:
             print("Verifying consistency.")
