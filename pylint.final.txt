@@ -38,4 +38,3 @@ merkle_proof.py:172:0: C0116: Missing function or method docstring (missing-func
 
 ------------------------------------------------------------------
 Your code has been rated at 8.87/10 (previous run: 8.87/10, +0.00)
-

@@ -1,4 +1,4 @@
-Name: Trapni Ajx
+Name: Trapni Ajnx
 Address: 123 Main Street, New York, NY
 Phone: 555-1234
-Email: trapni.ajx@example.com
+Email: trapni.ajnx@example.com
