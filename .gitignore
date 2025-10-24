@@ -1,1 +1,53 @@
+# Development
+.env
+.venv
+venv/
+env/
+.python-version
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Poetry
+poetry.lock
+
+# Checkpoint files
+checkpoint.json
+
+# Secrets
+*.key
+*.pem
+*.cert
+*.pub
+id_rsa*
+.DS_Store
