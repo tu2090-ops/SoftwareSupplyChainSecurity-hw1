@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "software-supply-chain-security-hw1"
+version = "3.0.0"
+description = "Software Supply Chain Security Assignment Project"
+authors = ["tu2090 <tu2090@nyu.edu>"]
+readme = "README.md"
+license = "MIT"
+packages = [{include = "software_supply_chain_security_hw1"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.31.0"
+cryptography = "^41.0.0"
+pyjwt = "^2.8.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.5.0"
+black = "^23.0.0"
+ruff = "^0.0.280"
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+safety = "^2.3.0"
+flake8 = "^7.3.0"
+pylint = "^4.0.2"
+bandit = "^1.8.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+packages = [{include = "software_supply_chain_security_hw1"}]
