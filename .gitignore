@@ -39,7 +39,7 @@ wheels/
 htmlcov/
 
 # Poetry
-poetry.lock
+# poetry.lock
 
 # Checkpoint files
 checkpoint.json
