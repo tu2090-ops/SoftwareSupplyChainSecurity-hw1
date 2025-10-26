@@ -15,7 +15,7 @@ If you discover a security vulnerability, please follow these steps:
 ### How to Report
 
 1. **Do NOT** open a public issue for security vulnerabilities
-2. Email the maintainer directly at [tu2090@nyu.edu]
+2. Email the maintainer
 3. Include the following information:
    - Description of the vulnerability
    - Steps to reproduce the issue
