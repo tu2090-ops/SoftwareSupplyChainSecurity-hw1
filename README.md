@@ -297,17 +297,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Student NetID:** tu2090  
 **Assignment:** Assignments
 
-### Assignment Components
-
-- **Assignment 1:** Rekor verification implementation
-- **Assignment 2:** Code quality and documentation
-- **Assignment 3:** 
-  - Part 1: Git best practices
-  - Part 2: Pre-commit secret scanning
-  - Part 3: Repository scrubbing
-  - Part 4: Poetry dependency management
-  - Part 5: Testing and coverage (>75%)
-
 ## Acknowledgments
 
 - Based on Sigstore tooling (rekor-cli, rekor-monitor)
