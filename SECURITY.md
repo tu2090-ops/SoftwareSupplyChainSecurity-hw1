@@ -2,15 +2,15 @@
 
 ## Supported Versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 3.x     | :white_check_mark: |
-| 2.x     | :white_check_mark: |
-| 1.x     | :x:                |
+| Version | Supported          | Notes                                      |
+| ------- | ------------------ | ------------------------------------------ |
+| 3.0.0   | :white_check_mark: | Assignment 3        |
+| 1.0.0   | :white_check_mark: | Initial Release - Assignment 1             |
 
 ## Reporting a Vulnerability
 
-We take the security of this project seriously. If you discover a security vulnerability, please follow these steps:
+We take the security of this project seriously. 
+If you discover a security vulnerability, please follow these steps:
 
 ### How to Report
 

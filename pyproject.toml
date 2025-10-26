@@ -23,10 +23,8 @@ safety = "^2.3.0"
 flake8 = "^7.3.0"
 pylint = "^4.0.2"
 bandit = "^1.8.6"
+coverage = "^7.11.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-
-packages = [{include = "software_supply_chain_security_hw1"}]
