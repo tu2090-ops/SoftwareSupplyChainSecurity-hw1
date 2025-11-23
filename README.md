@@ -140,7 +140,7 @@ python main.py --consistency \
   --root-hash OLD_ROOT_HASH
 
 ### Command-Line Options
-```
+bash ```
 usage: main.py [-h] [-d] [-c] [--inclusion LOG_INDEX] [--artifact FILEPATH]
                [--consistency] [--tree-id TREE_ID] [--tree-size SIZE]
                [--root-hash HASH]
@@ -156,10 +156,10 @@ options:
   --tree-size SIZE      Previous checkpoint tree size
   --root-hash HASH      Previous checkpoint root hash
 ```
-```
+
 ### 5. Publication & Supply Chain Security
 ```bash
-Package on PyPI
+# Package on PyPI
 This package is published on PyPI under the name `tu2090-python-rekor-monitor`.
 
 Links:
@@ -167,7 +167,7 @@ Links:
 - Install: `pip install tu2090-python-rekor-monitor`
 - GitHub Releases: https://github.com/tu2090/python-rekor-monitor/releases
 
-### Supply Chain Security Artifacts
+## Supply Chain Security Artifacts
 
 ### SBOM (Software Bill of Materials)
 - File: `cyclonedx-sbom.json`
@@ -185,7 +185,6 @@ Links:
 
 ### Verify Attestation
 
-```bash
 # Verify the attestation
 cosign verify-blob-attestation \
   --bundle sbom-attestation.bundle \
@@ -203,8 +202,7 @@ cosign verify-blob-attestation \
 - **Attestation Date:** November 2024
 - **Student:** tu2090
 - **Course:** Software Supply Chain Security - Fall 2025
-```
-```
+
 ## Testing
 
 ### Run Tests
