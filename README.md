@@ -389,4 +389,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For questions or issues related to this assignment:
 - Check [SECURITY.md](SECURITY.md) for security concerns
 - See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines
-- Review course materials and assignment documentation
