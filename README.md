@@ -198,8 +198,8 @@ cosign verify-blob-attestation \
 ```
 ### Release Information
 - **Version:** 4.0.0
-- **Release Date:** November 2024
-- **Attestation Date:** November 2024
+- **Release Date:** November 2025
+- **Attestation Date:** November 2025
 - **Student:** tu2090
 - **Course:** Software Supply Chain Security - Fall 2025
 
