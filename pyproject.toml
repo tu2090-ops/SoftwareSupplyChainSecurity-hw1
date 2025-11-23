@@ -1,11 +1,22 @@
 [tool.poetry]
-name = "software-supply-chain-security-hw1"
-version = "3.0.0"
-description = "Software Supply Chain Security Assignment Project"
+name = "tu2090-python-rekor-monitor"
+version = "4.0.0"
+description = "A Python client for verifying Rekor transparency log entries"
 authors = ["tu2090 <tu2090@nyu.edu>"]
 readme = "README.md"
 license = "MIT"
-packages = [{include = "software_supply_chain_security_hw1"}]
+packages = [{include = "tu2090_python_rekor_monitor", from = "src"}]
+keywords = ["rekor", "sigstore", "transparency-log", "merkle-tree", "supply-chain-security"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -25,7 +36,36 @@ pylint = "^4.0.2"
 bandit = "^1.8.6"
 coverage = "^7.11.0"
 types-requests = "^2.32.4.20250913"
+cyclonedx-bom = "^3.11.0"
+
+[tool.poetry.scripts]
+tu2090-python-rekor-monitor = "tu2090_python_rekor_monitor.main:main"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--cov=src --cov-report=term-missing"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  | \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''

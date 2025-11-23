@@ -1,6 +1,10 @@
 """
-I have referred to LLM to understand the concept of each function in depth
-and error solving when required. LLM helped me understand the concept about merkle proof.
+I have referred to LLM to understand the concept of each function and rewritten the code to improve its functionality and efficiency.
+Rekor Monitor Main Module
+This module provides functions to interact with the Rekor transparency log,
+including fetching log entries, verifying inclusion proofs, and checking
+consistency proofs. It also includes a command-line interface for users to
+perform these operations.                   
 """
 
 import argparse  # Adding necessary imports for API calls and JSON handling
@@ -10,8 +14,9 @@ import traceback  # Now available globally
 
 import requests
 
-from util import extract_public_key, verify_artifact_signature
-from merkle_proof import (
+# relative imports within the package
+from .util import extract_public_key, verify_artifact_signature
+from .merkle_proof import (
     DefaultHasher,
     verify_consistency,
     verify_inclusion,
@@ -20,7 +25,6 @@ from merkle_proof import (
 
 # Adding constant for Rekor API URL to avoid hardcoding throughout
 R_URL = "https://rekor.sigstore.dev"
-
 
 def get_log_entry(log_index, debug=False):
     """

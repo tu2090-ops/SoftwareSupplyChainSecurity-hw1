@@ -1,7 +1,7 @@
 # Software Supply Chain Security - HW1
 
 ## Description
-This project implements a Python-based verification system for Sigstore's Rekor transparency log. It demonstrates software supply chain security concepts including artifact signing, signature verification, and transparency log consistency validation.
+This project implements a Python-based verification system for Rekor transparency log. It demonstrates software supply chain security concepts including artifact signing, signature verification, and transparency log consistency validation.
 
 **Student NetID:** tu2090
 
@@ -15,24 +15,29 @@ This project implements a Python-based verification system for Sigstore's Rekor 
 ## Project Structure
 ```
 .
-├── main.py                      # Main verification script with CLI
-├── util.py                      # Cryptographic utility functions
-├── merkle_proof.py              # Merkle tree proof verification (RFC 6962)
-├── artifact.md                  # Sample signed artifact
-├── artifact.bundle              # Cosign signature bundle
-├── my_checkpoint.json           # Saved Rekor checkpoint
-├── tests/                       # Test suite
+├── src/
+│   └── tu2090_python_rekor_monitor/     # Main package (PyPI location)
+│       ├── __init__.py
+│       ├── main.py                      # Main verification script with CLI
+│       ├── util.py                      # Cryptographic utility functions
+│       └── merkle_proof.py              # Merkle tree proof verification (RFC 6962)
+├── tests/                               # Test suite
 │   ├── __init__.py
-│   ├── test.py                  # Core functionality tests
-│   └── test_checkpoint.py       # CLI checkpoint tests
-├── pyproject.toml               # Poetry dependency configuration
-├── poetry.lock                  # Locked dependencies
-├── .pre-commit-config.yaml      # Pre-commit hooks (TruffleHog)
-├── README.md                    # This file
-├── SECURITY.md                  # Security policy
-├── CONTRIBUTING.md              # Contribution guidelines
-├── LICENSE                      # MIT License
-└── CODEOWNERS                   # Code ownership
+│   ├── test.py                          # Core functionality tests
+│   └── test_checkpoint.py               # CLI checkpoint tests
+├── dist/                                # Built distributions 
+│   ├── tu2090_python_rekor_monitor-4.0.0-py3-none-any.whl
+│   └── tu2090_python_rekor_monitor-4.0.0.tar.gz
+├── cyclonedx-sbom.json                  # Software Bill of Materials 
+├── sbom-attestation.bundle              # Cosign attestation 
+├── pyproject.toml                       # Poetry dependency configuration
+├── poetry.lock                          # Locked dependencies
+├── .pre-commit-config.yaml              # Pre-commit hooks (TruffleHog)
+├── README.md                            # This file
+├── SECURITY.md                          # Security policy
+├── CONTRIBUTING.md                      # Contribution guidelines
+├── LICENSE                              # MIT License
+└── CODEOWNERS                           # Code ownership
 ```
 
 ## Installation
@@ -80,6 +85,14 @@ source venv/bin/activate  # On macOS/Linux
 pip install requests cryptography
 pip install pytest pytest-cov  # For testing
 ```
+# Install the published package
+pip install tu2090-python-rekor-monitor
+
+# Test the CLI
+tu2090-python-rekor-monitor --help
+
+# Or install in development environment
+pip install tu2090-python-rekor-monitor[dev]
 
 ## Usage
 
@@ -143,7 +156,55 @@ options:
   --tree-size SIZE      Previous checkpoint tree size
   --root-hash HASH      Previous checkpoint root hash
 ```
+```
+### 5. Publication & Supply Chain Security
+```bash
+Package on PyPI
+This package is published on PyPI under the name `tu2090-python-rekor-monitor`.
 
+Links:
+- PyPI Package: https://pypi.org/project/tu2090-python-rekor-monitor/
+- Install: `pip install tu2090-python-rekor-monitor`
+- GitHub Releases: https://github.com/tu2090/python-rekor-monitor/releases
+
+### Supply Chain Security Artifacts
+
+### SBOM (Software Bill of Materials)
+- File: `cyclonedx-sbom.json`
+- Format: CycloneDX JSON
+- Contents: Complete list of dependencies with exact versions
+- Purpose: Transparency and vulnerability scanning
+- Generated: `poetry run cyclonedx-bom -p -o cyclonedx-sbom.json --format json`
+
+### Cosign Attestation
+- File: `sbom-attestation.bundle`
+- Type: CycloneDX SBOM attestation
+- Signature: Signed with tu2090@nyu.edu identity via Sigstore
+- Location: Recorded in Rekor transparency log
+- Purpose: Cryptographic proof that SBOM belongs to this package version
+
+### Verify Attestation
+
+```bash
+# Verify the attestation
+cosign verify-blob-attestation \
+  --bundle sbom-attestation.bundle \
+  --type cyclonedx \
+  --certificate-identity tu2090@nyu.edu \
+  --certificate-oidc-issuer https://accounts.google.com \
+  --check-claims \
+  dist/tu2090_python_rekor_monitor-4.0.0-py3-none-any.whl
+
+# Expected output: Verified OK
+```
+### Release Information
+- **Version:** 4.0.0
+- **Release Date:** November 2024
+- **Attestation Date:** November 2024
+- **Student:** tu2090
+- **Course:** Software Supply Chain Security - Fall 2025
+```
+```
 ## Testing
 
 ### Run Tests
@@ -164,11 +225,7 @@ pytest tests/test.py
 pytest --cov=. --cov-report=html
 open htmlcov/index.html  # View in browser
 ```
-
-### Test Coverage
-Current test coverage: **>75%**
-
-Test files:
+## Test files:
 - `tests/test.py` - Core functionality tests
 - `tests/test_checkpoint.py` - CLI checkpoint tests
 
@@ -243,6 +300,8 @@ mypy .
 - `flake8` (^7.0.0) - Style checker
 - `pylint` (^3.0.3) - Code analyzer
 - `bandit` (^1.7.6) - Security checker
+- `yclonedx-bom (^3.11.0)` - SBOM generation
+- `cosign (system binary)` - Package attestation and verification
 
 ## Architecture
 
@@ -309,6 +368,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Sigstore Documentation](https://docs.sigstore.dev/)
 - [Rekor API Specification](https://www.sigstore.dev/swagger/)
 - [Cosign Documentation](https://docs.sigstore.dev/cosign/overview/)
+- [CycloneDX Specification](https://cyclonedx.org/)
 
 ## Troubleshooting
 
