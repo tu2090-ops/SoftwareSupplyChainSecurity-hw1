@@ -75,4 +75,8 @@ jobs:
       - name: "Upload to code-scanning"
         uses: github/codeql-action/upload-sarif@v3
         with:
+<<<<<<< HEAD
           sarif_file: results.sarif
+=======
+          sarif_file: results.sarif
+>>>>>>> d0e2cab (Add GitHub Actions workflows for CI/CD and Scorecard)

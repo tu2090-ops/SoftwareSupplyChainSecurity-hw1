@@ -2,14 +2,14 @@ import base64
 import os
 import sys
 from unittest.mock import Mock, patch
-from main import get_latest_checkpoint, main
-from merkle_proof import DefaultHasher, compute_leaf_hash, verify_inclusion
-from util import verify_artifact_signature
+
 # Add parent directory to path BEFORE importing local modules
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
 
 # Import local modules AFTER sys.path modification
-
+from tu2090_python_rekor_monitor.main import get_latest_checkpoint, main
+from tu2090_python_rekor_monitor.merkle_proof import DefaultHasher, compute_leaf_hash, verify_inclusion, Hasher
+from tu2090_python_rekor_monitor.util import verify_artifact_signature
 
 class TestCriticalFunctionality:
     """Only test the most critical functions that could break"""
@@ -23,7 +23,7 @@ class TestCriticalFunctionality:
         assert isinstance(result, str)
         assert len(result) == 64  # SHA256 hex digest
 
-    @patch("requests.get")
+    @patch("tu2090_python_rekor_monitor.main.requests.get")
     def test_get_latest_checkpoint_success(self, mock_get):
         """Test checkpoint retrieval - core API functionality"""
         mock_response = Mock()
@@ -42,7 +42,7 @@ class TestCriticalFunctionality:
         assert result["treeSize"] == 100
         assert "rootHash" in result
 
-    @patch("requests.get")
+    @patch("tu2090_python_rekor_monitor.main.requests.get")
     def test_get_latest_checkpoint_network_failure(self, mock_get):
         """Test checkpoint error handling"""
         mock_get.side_effect = Exception("Network error")
@@ -63,12 +63,11 @@ class TestCriticalFunctionality:
 
     def test_module_imports(self):
         """Test that all modules can be imported (basic sanity check)"""
-
         # If we get here, imports work
         assert True
 
     @patch("builtins.open")
-    @patch("util.load_pem_public_key")
+    @patch("tu2090_python_rekor_monitor.util.load_pem_public_key")
     def test_verify_artifact_signature_file_access(self, mock_load_key, mock_open):
         """Test artifact verification can handle files"""
         mock_public_key = Mock()
@@ -91,8 +90,7 @@ class TestCriticalFunctionality:
 
     def test_hasher_basic_operations(self):
         """Test core Hasher functionality"""
-        from merkle_proof import Hasher
-
+        # Hasher is already imported at the top
         hasher = Hasher()
         leaf_data = b"test"
         result = hasher.hash_leaf(leaf_data)

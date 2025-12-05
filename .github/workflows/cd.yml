@@ -1,0 +1,81 @@
+name: Continuous Deployment
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  attestations: write
+  id-token: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+        
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: 1.7.1
+        
+    - name: Extract version from tag
+      id: version
+      run: |
+        TAG_NAME=${GITHUB_REF#refs/tags/}
+        echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+        echo "VERSION=${TAG_NAME#v}" >> $GITHUB_ENV
+        
+    - name: Update version in pyproject.toml
+      run: |
+        poetry version ${{ env.VERSION }}
+        
+    - name: Install dependencies
+      run: poetry install --no-interaction
+      
+    - name: Build package
+      run: poetry build
+      
+    - name: Generate SBOM
+      run: |
+        poetry add cyclonedx-bom --dev
+        poetry run cyclonedx-py --format json --output sbom.json
+        poetry run cyclonedx-py --format xml --output sbom.xml
+        
+    - name: Attest SBOM
+      uses: actions/attest-sbom@v1
+      with:
+        sbom-path: sbom.json
+        subject-name: tu2090-python-rekor-monitor
+        subject-digest: sha256:${{ github.sha }}
+        push-to-registry: false
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Release ${{ env.TAG_NAME }}
+        tag_name: ${{ env.TAG_NAME }}
+        body: |
+          Automated release with SBOM attestation
+          
+          ## Artifacts
+          - Source distribution
+          - Wheel distribution
+          - SBOM (JSON and XML)
+          - SBOM attestation
+        files: |
+          dist/*
+          sbom.json
+          sbom.xml
+          sbom-attestation.bundle

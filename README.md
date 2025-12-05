@@ -1,5 +1,9 @@
 # Software Supply Chain Security - HW1
 
+[![CI Status](https://github.com/tu2090/software-supply-chain-security-hw1/actions/workflows/ci.yml/badge.svg)](https://github.com/tu2090/software-supply-chain-security-hw1/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/tu2090/software-supply-chain-security-hw1/badgegithub.com/tu2090/software-supply-chain-security-hw1/badge)](https://securityscorecards.dev/viewer/?uri=github.com/tu2090/software-supply-chain-security-hw1)
+[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/1/badge)](https://bestpractices.coreinfrastructure.org/ projects/1)
+
 ## Description
 This project implements a Python-based verification system for Rekor transparency log. It demonstrates software supply chain security concepts including artifact signing, signature verification, and transparency log consistency validation.
 
@@ -84,6 +88,9 @@ source venv/bin/activate  # On macOS/Linux
 # Install dependencies
 pip install requests cryptography
 pip install pytest pytest-cov  # For testing
+
+# Install from PyPI
+pip install tu2090-python-rekor-monitor
 ```
 # Install the published package
 pip install tu2090-python-rekor-monitor
@@ -110,20 +117,24 @@ This will:
 
 ### 2. Get Current Checkpoint
 ```bash
-# Fetch latest Rekor checkpoint
-python main.py -c
+# From project root directory
+python -m src.tu2090_python_rekor_monitor.main -c
+
+# Or if installed
+tu2090-python-rekor-monitor -c
 
 # With debug mode (saves to checkpoint.json)
-python main.py -d -c
+python -m src.tu2090_python_rekor_monitor.main -d -c
 ```
 
 ### 3. Verify Inclusion Proof
 ```bash
 # Verify artifact signature and inclusion in Rekor log
-python main.py --inclusion LOG_INDEX --artifact artifact.md
+tu2090-python-rekor-monitor --inclusion LOG_INDEX --artifact artifact.md
+tu2090-python-rekor-monitor -d --inclusion LOG_INDEX --artifact artifact.md
 
-# With debug output
-python main.py -d --inclusion LOG_INDEX --artifact artifact.md
+# Or from source:
+python -m src.tu2090_python_rekor_monitor.main --inclusion LOG_INDEX --artifact artifact.md
 ```
 
 This verifies:
@@ -134,7 +145,13 @@ This verifies:
 ### 4. Verify Consistency Proof
 ```bash
 # Verify log consistency between two checkpoints
-python main.py --consistency \
+tu2090-python-rekor-monitor --consistency \
+  --tree-id TREE_ID \
+  --tree-size OLD_SIZE \
+  --root-hash OLD_ROOT_HASH
+
+# Or from source:
+python -m src.tu2090_python_rekor_monitor.main --consistency \
   --tree-id TREE_ID \
   --tree-size OLD_SIZE \
   --root-hash OLD_ROOT_HASH
@@ -217,14 +234,14 @@ pytest -v
 pytest --cov=. --cov-report=term-missing
 
 # Run specific test file
-pytest tests/test.py
+pytest tests/test_main.py
 
 # Generate HTML coverage report
 pytest --cov=. --cov-report=html
 open htmlcov/index.html  # View in browser
 ```
 ## Test files:
-- `tests/test.py` - Core functionality tests
+- `tests/test_main.py` - Core functionality tests
 - `tests/test_checkpoint.py` - CLI checkpoint tests
 
 ## Code Modules
