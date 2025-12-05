@@ -8,8 +8,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..",
 
 # Import local modules AFTER sys.path modification
 from tu2090_python_rekor_monitor.main import get_latest_checkpoint, main
-from tu2090_python_rekor_monitor.merkle_proof import DefaultHasher, compute_leaf_hash, verify_inclusion, Hasher
+from tu2090_python_rekor_monitor.merkle_proof import (
+    DefaultHasher,
+    Hasher,
+    compute_leaf_hash,
+    verify_inclusion,
+)
 from tu2090_python_rekor_monitor.util import verify_artifact_signature
+
 
 class TestCriticalFunctionality:
     """Only test the most critical functions that could break"""
