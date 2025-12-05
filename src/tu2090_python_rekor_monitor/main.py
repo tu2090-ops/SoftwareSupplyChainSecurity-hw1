@@ -16,17 +16,17 @@ import traceback
 # 2. Third-Party Imports (requests)
 import requests
 
-# 3. Local/Relative Imports
-from .util import extract_public_key, verify_artifact_signature
 from .merkle_proof import (
     DefaultHasher,
+    compute_leaf_hash,
     verify_consistency,
     verify_inclusion,
-    compute_leaf_hash,
 )
 
-# relative imports within the package
+# 3. Local/Relative Imports
 from .util import extract_public_key, verify_artifact_signature
+
+# relative imports within the package
 
 # Adding constant for Rekor API URL to avoid hardcoding throughout
 R_URL = "https://rekor.sigstore.dev"
