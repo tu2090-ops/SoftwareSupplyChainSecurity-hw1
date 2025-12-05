@@ -4,7 +4,7 @@ Rekor Monitor Main Module
 This module provides functions to interact with the Rekor transparency log,
 including fetching log entries, verifying inclusion proofs, and checking
 consistency proofs. It also includes a command-line interface for users to
-perform these operations.                   
+perform these operations.
 """
 
 import argparse  # Adding necessary imports for API calls and JSON handling

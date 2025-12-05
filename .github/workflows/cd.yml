@@ -11,31 +11,31 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.11"
         cache: 'pip'
-        
+
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
         version: latest
         virtualenvs-in-project: true
-        
+
     - name: Install dependencies
       run: poetry install --no-interaction
-      
+
     - name: Build package
       run: poetry build
-      
+
     - name: Generate requirements.txt for reference
       run: |
         cat > requirements.txt << 'EOF'
@@ -43,18 +43,18 @@ jobs:
         cryptography>=41.0.0
         PyJWT>=2.8.0
         EOF
-        
+
     - name: Find SBOM file
       run: |
         find . -name "cyclonedx-sbom.json" -o -name "sbom.json"
         ls -la cyclonedx-sbom.json 2>/dev/null || echo "File not found, will be generated"
-        
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
         name: build-artifacts
         path: dist/
-        
+
     - name: Upload SBOM artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -67,35 +67,35 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
         name: build-artifacts
         path: dist/
-        
+
     - name: Download SBOM artifacts
       uses: actions/download-artifact@v4
       with:
         name: sbom-artifacts
         path: ./
       continue-on-error: true
-        
+
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
         body: |
           ## Release ${{ github.ref_name }}
-          
+
           ### Artifacts
           - **dist/*.whl** - Python wheel distribution
           - **dist/*.tar.gz** - Source distribution
           - **cyclonedx-sbom.json** - Software Bill of Materials
-          
+
           ### Details
           Build Date: ${{ github.event.head_commit.timestamp }}
           Commit: ${{ github.sha }}

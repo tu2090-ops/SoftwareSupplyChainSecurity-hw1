@@ -30,11 +30,11 @@ This project implements a Python-based verification system for Rekor transparenc
 │   ├── __init__.py
 │   ├── test.py                          # Core functionality tests
 │   └── test_checkpoint.py               # CLI checkpoint tests
-├── dist/                                # Built distributions 
+├── dist/                                # Built distributions
 │   ├── tu2090_python_rekor_monitor-4.0.0-py3-none-any.whl
 │   └── tu2090_python_rekor_monitor-4.0.0.tar.gz
-├── cyclonedx-sbom.json                  # Software Bill of Materials 
-├── sbom-attestation.bundle              # Cosign attestation 
+├── cyclonedx-sbom.json                  # Software Bill of Materials
+├── sbom-attestation.bundle              # Cosign attestation
 ├── pyproject.toml                       # Poetry dependency configuration
 ├── poetry.lock                          # Locked dependencies
 ├── .pre-commit-config.yaml              # Pre-commit hooks (TruffleHog)
@@ -368,8 +368,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Assignment Information
 
-**Course:** Software Supply Chain Security - Fall 2025  
-**Student NetID:** tu2090  
+**Course:** Software Supply Chain Security - Fall 2025
+**Student NetID:** tu2090
 **Assignment:** Assignments
 
 ## Acknowledgments
@@ -390,16 +390,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Common Issues
 
-**Issue:** `ModuleNotFoundError: No module named 'requests'`  
+**Issue:** `ModuleNotFoundError: No module named 'requests'`
 **Solution:** Install dependencies with `poetry install` or `pip install requests cryptography`
 
-**Issue:** Signature verification fails  
+**Issue:** Signature verification fails
 **Solution:** Ensure artifact.md hasn't been modified since signing
 
-**Issue:** Inclusion proof verification fails  
+**Issue:** Inclusion proof verification fails
 **Solution:** Verify you're using the correct log index from artifact.bundle
 
-**Issue:** Pre-commit hook blocks commit  
+**Issue:** Pre-commit hook blocks commit
 **Solution:** Secret detected - remove sensitive data before committing
 
 ## Contact

@@ -12,23 +12,23 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
-        
+
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
         version: latest
         virtualenvs-in-project: true
-        
+
     - name: Cache Poetry virtualenv
       uses: actions/cache@v4
       with:
@@ -36,30 +36,30 @@ jobs:
         key: ${{ runner.os }}-poetry-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
         restore-keys: |
           ${{ runner.os }}-poetry-${{ matrix.python-version }}-
-          
+
     - name: Install dependencies
       run: poetry install --no-interaction
-      
+
     - name: Format code with Black
       run: poetry run black .
       continue-on-error: false
-      
+
     - name: Sort imports with isort
       run: poetry run isort .
       continue-on-error: false
-      
+
     - name: Lint with Ruff
       run: poetry run ruff check .
       continue-on-error: true
-      
+
     - name: SAST with Bandit
       run: poetry run bandit -r . -ll -f json -o bandit-report.json || true
       continue-on-error: true
-      
+
     - name: Run tests with pytest and coverage
       run: poetry run pytest tests/ -v --cov=. --cov-report=json --cov-report=html --cov-report=term-missing || true
       continue-on-error: true
-      
+
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
@@ -67,7 +67,7 @@ jobs:
         flags: unittests
         name: codecov-${{ matrix.python-version }}
       continue-on-error: true
-      
+
     - name: Upload test reports
       if: always()
       uses: actions/upload-artifact@v4

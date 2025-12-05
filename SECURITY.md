@@ -9,7 +9,7 @@
 
 ## Reporting a Vulnerability
 
-We take the security of this project seriously. 
+We take the security of this project seriously.
 If you discover a security vulnerability, please follow these steps:
 
 ### How to Report
