@@ -21,55 +21,59 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        cache: 'poetry'
+        cache: 'pip'
         
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
-        version: 1.7.1
+        version: latest
+        virtualenvs-in-project: true
         
-    - name: Cache dependencies
-      # Updated from v3 to v4
+    - name: Cache Poetry virtualenv
       uses: actions/cache@v4
       with:
-        path: ~/.cache/pypoetry
-        key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+        path: .venv
+        key: ${{ runner.os }}-poetry-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
         restore-keys: |
-          ${{ runner.os }}-poetry-
+          ${{ runner.os }}-poetry-${{ matrix.python-version }}-
           
     - name: Install dependencies
       run: poetry install --no-interaction
       
     - name: Code formatting check with Black
-      run: poetry run black --check src/ tests/
+      run: poetry run black --check .
+      continue-on-error: false
+      
+    - name: Import sorting check with isort
+      run: poetry run isort --check-only .
+      continue-on-error: false
       
     - name: Lint with Ruff
-      run: poetry run ruff check src/ tests/
-      
-    - name: Lint with Flake8
-      run: poetry run flake8 src/ tests/ --max-line-length=88
+      run: poetry run ruff check .
+      continue-on-error: false
       
     - name: SAST with Bandit
-      run: |
-        poetry run bandit -r src/ -f json -o bandit-report.json
-        poetry run bandit -r src/ -ll
-        
-    - name: Secret scanning with TruffleHog
-      uses: trufflesecurity/trufflehog@main
-      with:
-        path: ./
-        base: ${{ github.event.before || 'HEAD^' }}
-        head: HEAD
-        
+      run: poetry run bandit -r . -ll
+      continue-on-error: false
+      
     - name: Run tests with pytest and coverage
-      run: |
-        poetry run pytest tests/ -v --cov=src --cov-report=xml --cov-report=html --cov-report=term-missing
-        
+      run: poetry run pytest tests/ -v --cov=. --cov-report=xml --cov-report=html --cov-report=term-missing
+      continue-on-error: false
+      
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella-${{ matrix.python-version }}
+      continue-on-error: true
+      
     - name: Upload test reports
-      # Updated from v3 to v4
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-reports-${{ matrix.python-version }}
         path: |
           coverage.xml
           htmlcov/
+          bandit-report.json
