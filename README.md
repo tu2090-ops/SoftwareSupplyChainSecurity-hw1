@@ -2,7 +2,8 @@
 
 [![CI Status](https://github.com/tu2090/software-supply-chain-security-hw1/actions/workflows/ci.yml/badge.svg)](https://github.com/tu2090/software-supply-chain-security-hw1/actions/workflows/ci.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/tu2090/software-supply-chain-security-hw1/badgegithub.com/tu2090/software-supply-chain-security-hw1/badge)](https://securityscorecards.dev/viewer/?uri=github.com/tu2090/software-supply-chain-security-hw1)
-[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/1/badge)](https://bestpractices.coreinfrastructure.org/ projects/1)
+[![OpenSSF Best Practices](https://urldefense.proofpoint.com/v2/url?u=https-3A__www.bestpractices.dev_en_projects_11559&d=DwICaQ&c=slrrB7dE8n7gBJbeO0g-IQ&r=zR1qp_mP1VyttnJymN3UoA&m=YXamLqr-Xw0TLoZT7gM7mQwZ7Ete7ZT5jeDgEqEmhgXsbyeGjFMD0zc38ACeIJzN&s=xbjXcjGS9NmnMSph3hZF_e5pWmNdWuKNx_eWfNyUl44&e=)
+
 
 ## Description
 This project implements a Python-based verification system for Rekor transparency log. It demonstrates software supply chain security concepts including artifact signing, signature verification, and transparency log consistency validation.
