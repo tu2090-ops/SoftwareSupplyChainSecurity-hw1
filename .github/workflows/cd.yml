@@ -49,15 +49,19 @@ jobs:
       
     - name: Generate SBOM
       run: |
-        poetry add cyclonedx-bom --dev
-        poetry run cyclonedx-py --format json --output sbom.json
-        poetry run cyclonedx-py --format xml --output sbom.xml
+        # Install cyclonedx-bom using the new --group dev syntax
+        poetry add cyclonedx-bom --group dev
+        # Generate SBOM with --poetry flag
+        poetry run cyclonedx-py --poetry --format json --output sbom.json
+        poetry run cyclonedx-py --poetry --format xml --output sbom.xml
         
     - name: Attest SBOM
       uses: actions/attest-sbom@v1
       with:
+        # Use the JSON SBOM file we generated
         sbom-path: sbom.json
-        subject-name: tu2090-python-rekor-monitor
+        # Use GitHub repository name dynamically
+        subject-name: ${{ github.event.repository.name }}
         subject-digest: sha256:${{ github.sha }}
         push-to-registry: false
         
@@ -78,4 +82,5 @@ jobs:
           dist/*
           sbom.json
           sbom.xml
+          # The attestation step will generate this file
           sbom-attestation.bundle
