@@ -1,7 +1,7 @@
 # Software Supply Chain Security - HW1
 
 [![CI Status](https://github.com/tu2090-ops/SoftwareSupplyChainSecurity-hw1/actions/workflows/ci.yml/badge.svg)](https://github.com/tu2090-ops/SoftwareSupplyChainSecurity-hw1/actions/workflows/ci.yml)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/tu2090/software-supply-chain-security-hw1/badgegithub.com/tu2090/software-supply-chain-security-hw1/badge)](https://securityscorecards.dev/viewer/?uri=github.com/tu2090/software-supply-chain-security-hw1)
+[![Scorecard supply-chain security](https://github.com/tu2090-ops/SoftwareSupplyChainSecurity-hw1/actions/workflows/scorecard.yml/badge.svg)](https://github.com/tu2090-ops/SoftwareSupplyChainSecurity-hw1/actions/workflows/scorecard.yml)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/11559/badge)](https://www.bestpractices.dev/projects/11559)
 
 
